@@ -14,17 +14,22 @@
     "cirru-script": "^0.2.3",
     "cirru-script-loader": "0.1.0",
     "del": "^1.1.1",
+    "file-loader": "^0.8.4",
     "gulp": "^3.8.11",
     "gulp-cirru-script": "^0.1.1",
     "raw-loader": "^0.5.1",
     "rsyncwrapper": "^0.4.2",
     "run-sequence": "^1.0.2",
     "stir-template": "^0.1.4",
+    "url-loader": "^0.5.6",
     "webpack": "^1.8.5",
     "webpack-dev-server": "^1.8.0"
   },
   "dependencies": {
-    "remarkable": "^1.6.0"
+    "classnames": "^2.1.1",
+    "keycode": "^2.1.0",
+    "react": "^0.13.3",
+    "react-remarkable": "^1.1.1"
   },
   "repository": {
     "type": "git",

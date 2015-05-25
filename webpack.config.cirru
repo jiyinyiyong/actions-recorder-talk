@@ -20,3 +20,5 @@ var
   :module $ object
     :loaders $ array
       object (:test /\.cirru$) (:loader :cirru-script) (:ignore /node_modules)
+      object (:test /\.md$) (:loader :raw-loader)
+      object (:test /\.png$) (:loader :url-loader)

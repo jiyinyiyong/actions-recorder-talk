@@ -1,0 +1,41 @@
+
+.app-root {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.titles {
+    flex: 1;
+    position: relative;
+}
+
+.title {
+    margin: 10px 0;
+    line-height: 40px;
+    padding: 0 10px;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.48);
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.title:hover,
+.title.is-active {
+    background-color: #EFEFEF;
+}
+
+.slides {
+    width: 80%;
+    position: relative;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
