@@ -6,6 +6,7 @@ var
   classnames $ require :classnames
   slides $ require :../slides.md
   reader $ require :./util/reader
+  mdOptions $ require :./md-options
 
 var
   div $ React.createFactory :div
@@ -53,6 +54,7 @@ var App $ React.createClass $ object
       return $ div
         object (:className :slide) (:key index) (:style style)
         Markdown $ object (:source block.content)
+          :options mdOptions
 
   :renderTitles $ \ ()
     return $ blocks.map $ \\ (block index)
@@ -73,6 +75,7 @@ var App $ React.createClass $ object
       div (object (:className :slides))
         this.renderSlides
       div (object (:className :titles))
+        div (object (:className :mark))
         this.renderTitles
 
 React.render (React.createElement App) document.body
