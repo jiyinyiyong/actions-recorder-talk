@@ -1,7 +1,7 @@
 
 var
   React $ require :react
-  Markdown $ require :react-remarkable
+  Markdown $ React.createFactory $ require :react-remarkable
   keycode $ require :keycode
   classnames $ require :classnames
   slides $ require :../slides.md
@@ -18,25 +18,20 @@ var App $ React.createClass $ object
   :getInitialState $ \ ()
     return $ object
       :cursor 0
-      :focus false
 
   :componentDidMount $ \ ()
-    window.addEventListener :keyDown this.onWindowKeydown
+    window.addEventListener :keydown this.onWindowKeydown
 
   :componentWillUnmount $ \ ()
-    window.removeEventListener :keyDown this.onWindowKeydown
+    window.removeEventListener :keydown this.onWindowKeydown
 
   :moveUp $ \ ()
     this.setState $ object
-      :cursor $ - this.state.cursor 1
+      :cursor $ Math.max (- this.state.cursor 1) 0
 
   :moveDown $ \ ()
     this.setState $ object
-      :cursor $ + this.state.cursor 1
-
-  :onFocusToggle $ \ ()
-    this.setState $ object
-      :focus $ not this.state.focus
+      :cursor $ Math.min (+ this.state.cursor 1) (- blocks.length 1)
 
   :onWindowKeydown $ \ (event)
     switch (keycode event.keyCode)
@@ -46,19 +41,18 @@ var App $ React.createClass $ object
       :down
         event.preventDefault
         this.moveDown
-      :space
-        event.preventDefault
-        this.onFocusToggle
 
   :onTitleClick $ \ (index)
     this.setState $ object
       :cursor index
 
   :renderSlides $ \ ()
-    return $ blocks.map $ \ (block index)
+    return $ blocks.map $ \\ (block index)
+      var style $ object
+        :top $ * innerHeight (- index this.state.cursor)
       return $ div
-        object (:className :slide) (:key index)
-        , block.content
+        object (:className :slide) (:key index) (:style style)
+        Markdown $ object (:source block.content)
 
   :renderTitles $ \ ()
     return $ blocks.map $ \\ (block index)
@@ -66,8 +60,11 @@ var App $ React.createClass $ object
         :is-active $ is index this.state.cursor
       var onTitleClick $ \\ ()
         this.onTitleClick index
+      var style $ object
+        :top $ + (/ innerHeight 2)
+          * 50 (- index this.state.cursor)
       return $ div
-        object (:className className) (:key index)
+        object (:className className) (:key index) (:style style)
           :onClick onTitleClick
         , block.title
 
