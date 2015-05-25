@@ -3,6 +3,8 @@
 
 So, this is a slide tool.
 
+https://github.com/Memkits/sedum-slide
+
 ----
 
 ### Logo

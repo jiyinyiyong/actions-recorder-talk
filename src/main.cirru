@@ -47,6 +47,11 @@ var App $ React.createClass $ object
     this.setState $ object
       :cursor index
 
+  :onSlideClick $ \ (event)
+    event.preventDefault
+    if (is event.target.tagName :A) $ do
+      window.open event.target.href
+
   :renderSlides $ \ ()
     return $ blocks.map $ \\ (block index)
       var style $ object
@@ -72,7 +77,9 @@ var App $ React.createClass $ object
 
   :render $ \ ()
     return $ div (object (:className :app-root))
-      div (object (:className :slides))
+      div
+        object (:className :slides)
+          :onClick this.onSlideClick
         this.renderSlides
       div (object (:className :titles))
         div (object (:className :mark))

@@ -1,8 +1,10 @@
 
-Workflow based on Webpack & CirruScript
+Sedum Slide
 ----
 
-Scaffold for personal projects.
+Demo http://repo.tiye.me/sedum-slide/
+
+A small slide tool to be less disturbing.
 
 ### Logo
 
