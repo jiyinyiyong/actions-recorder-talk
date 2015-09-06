@@ -11,7 +11,7 @@ var
   mdOptions $ require :../md-options
 
 var
-  viewHeight 780
+  viewHeight 600
 
 var
   div $ React.createFactory :div
@@ -82,11 +82,14 @@ var blocks $ reader.read slides
         , block.title
 
   :render $ \ ()
+    var markStyle $ {}
+      :top $ + (/ viewHeight 2)
+        * 50 0
     div ({} (:className :app-root))
       div
         {} (:className :slides)
           :onClick this.onSlideClick
         this.renderSlides
       div ({} (:className :titles))
-        div ({} (:className :mark))
+        div $ {} (:className :mark) (:style markStyle)
         this.renderTitles
