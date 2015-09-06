@@ -11,6 +11,7 @@
 .titles {
     flex: 1;
     position: relative;
+    -webkit-user-select: none;
 }
 
 .mark {

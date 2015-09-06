@@ -22,10 +22,10 @@ gulp.task :rsync $ \ (cb)
   wrapper.rsync
     object
       :ssh true
-      :src $ array :index.html :build :images
+      :src $ array :index.html :build :images :illustrations :slides.md
       :recursive true
       :args $ array :--verbose
-      :dest :tiye:~/repo/sedum-slide/
+      :dest :tiye:~/repo/actions-recorder-talk/
       :deleteAll true
     \ (error stdout stderr cmd)
       if (? error)
