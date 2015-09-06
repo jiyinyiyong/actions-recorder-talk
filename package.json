@@ -2,23 +2,27 @@
   "name": "sedum-slide",
   "version": "0.0.1",
   "description": "Small slide tool",
+  "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "jiyinyiyong",
   "license": "MIT",
   "keywords": [
-    "workflow"
+    "slide"
   ],
   "devDependencies": {
+    "autoprefixer-loader": "^2.1.0",
     "cirru-script": "^0.2.3",
     "cirru-script-loader": "0.1.0",
     "css-loader": "^0.14.2",
     "del": "^1.1.1",
+    "extract-text-webpack-plugin": "^0.8.2",
     "file-loader": "^0.8.4",
     "gulp": "^3.8.11",
     "gulp-cirru-script": "^0.1.1",
     "raw-loader": "^0.5.1",
+    "react-hot-loader": "^1.3.0",
     "rsyncwrapper": "^0.4.2",
     "run-sequence": "^1.0.2",
     "stir-template": "^0.1.4",

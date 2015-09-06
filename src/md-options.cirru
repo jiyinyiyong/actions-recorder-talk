@@ -2,9 +2,7 @@
 var
   hljs $ require :highlight.js
 
-require :highlight.js/styles/github.css
-
-= module.exports $ object
+= module.exports $ {}
   :html false
   :breaks true
   :langPrefix :language-

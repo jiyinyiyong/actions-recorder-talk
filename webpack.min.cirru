@@ -3,19 +3,23 @@ var
   webpack $ require :webpack
   config $ require :./webpack.config
   fs $ require :fs
+  ExtractTextPlugin $ require :extract-text-webpack-plugin
 
 = module.exports $ object
   :entry $ object
     :main $ array :./src/main
+    :vendor $ array
 
   :output $ object
     :path :build/
-    :filename :[name].[chunkhash].js
+    :filename :[name].[chunkhash:8].js
     :publicPath :./build/
 
   :resolve config.resolve
   :module config.module
   :plugins $ array
+    new webpack.optimize.CommonsChunkPlugin :vendor :vendor.[chunkhash:8].js
+    new ExtractTextPlugin :style.[chunkhash:8].css
     new webpack.optimize.UglifyJsPlugin $ object (:sourceMap false)
     \ ()
       this.plugin :done $ \ (stats)

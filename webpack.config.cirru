@@ -1,25 +1,32 @@
 
 var
   fs $ require :fs
+  webpack $ require :webpack
+  ExtractTextPlugin $ require :extract-text-webpack-plugin
 
-= module.exports $ object
-  :entry $ object
-    :main $ array
-      , :webpack-dev-server/client?http://0.0.0.0:8080
+= module.exports $ {}
+  :entry $ {}
+    :vendor $ array
+      , :webpack-dev-server/client?http://192.168.0.129:8080
       , :webpack/hot/dev-server
-      , :./src/main
+    :main $ array :./src/main
 
-  :output $ object
+  :output $ {}
     :path :build/
     :filename :[name].js
-    :publicPath :http://localhost:8080/build/
+    :publicPath :http://192.168.0.129:8080/build/
 
-  :resolve $ object
+  :resolve $ {}
     :extensions $ array :.js :.cirru :
 
-  :module $ object
+  :module $ {}
     :loaders $ array
-      object (:test /\.cirru$) (:loader :cirru-script) (:ignore /node_modules)
-      object (:test /\.md$) (:loader :raw-loader)
-      object (:test /\.png$) (:loader :url-loader)
-      object (:test /\.css$) (:loader :style-loader!css-loader)
+      {} (:test /\.cirru$) (:loader :react-hot!cirru-script) (:ignore /node_modules)
+      {} (:test /\.md$) (:loader :raw-loader)
+      {} (:test /\.png$) (:loader :url-loader)
+      {} (:test /\.css$) $ :loader
+        ExtractTextPlugin.extract :style-loader :css!autoprefixer
+
+  :plugins $ array
+    new webpack.optimize.CommonsChunkPlugin :vendor :vendor.js
+    new ExtractTextPlugin :style.css

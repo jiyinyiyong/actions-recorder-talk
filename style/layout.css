@@ -14,25 +14,26 @@
 }
 
 .mark {
-    background: #EFEFEF;
+    background: #ccc;
     width: 100%;
     position: absolute;
-    height: 40px;
+    height: 60px;
     top: 50%;
 }
 
 .title {
-    line-height: 40px;
-    padding: 0 10px;
+    line-height: 60px;
+    padding: 0 20px;
     cursor: pointer;
     position: absolute;
     top: 0;
     width: 100%;
     transition-duration: 300ms;
+    font-size: 24px;
 }
 
 .title:hover {
-    background-color: #EFEFEF;
+    background-color: #939393;
 }
 
 .slides {
@@ -47,5 +48,6 @@
     height: 100%;
     transition-duration: 300ms;
     padding: 40px;
-    font-size: 24px;
+    font-size: 32px;
+    line-height: 2em;
 }

@@ -1,11 +1,20 @@
 
 var
+  fs $ require :fs
   gulp $ require :gulp
   sequence $ require :run-sequence
   exec $ . (require :child_process) :exec
   env $ object
     :dev true
-    :main :http://localhost:8080/build/main.js
+    :main :http://192.168.0.129:8080/build/main.js
+    :vendor :http://192.168.0.129:8080/build/vendor.js
+    :style :http://192.168.0.129:8080/build/style.css
+
+if (? require.extensions) $ do
+  = (. require.extensions :.md) $ \ (module filename)
+    var code $ fs.readFileSync filename :utf8
+    = module.exports code
+    return module
 
 gulp.task :rsync $ \ (cb)
   var
@@ -13,10 +22,10 @@ gulp.task :rsync $ \ (cb)
   wrapper.rsync
     object
       :ssh true
-      :src $ array :index.html :build :images :style
+      :src $ array :index.html :build
       :recursive true
       :args $ array :--verbose
-      :dest :tiye:~/repo/sedum-slide/
+      :dest :tiye:~/repo/workflow/
       :deleteAll true
     \ (error stdout stderr cmd)
       if (? error)
@@ -37,11 +46,12 @@ gulp.task :script $ \ ()
 gulp.task :html $ \ (cb)
   var
     html $ require :./template
-    fs $ require :fs
     assets
   if (not env.dev) $ do
     = assets $ require :./build/assets.json
-    = env.main $ + :./build/ assets.main
+    = env.main $ + :./build/ $ . assets.main 0
+    = env.style $ + :./build/ $ . assets.main 1
+    = env.vendor $ + :./build/ assets.vendor
   fs.writeFile :index.html (html env) cb
 
 gulp.task :del $ \ (cb)
@@ -51,7 +61,7 @@ gulp.task :del $ \ (cb)
 
 gulp.task :webpack $ \ (cb)
   var
-    command $ cond env.dev :webpack ":webpack --config webpack.min.cirru"
+    command $ cond env.dev :webpack ":webpack --config webpack.min.cirru --progress"
   exec command $ \ (err stdout stderr)
     console.log stdout
     console.log stderr
