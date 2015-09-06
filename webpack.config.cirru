@@ -20,12 +20,11 @@ var
     :extensions $ array :.js :.cirru :
 
   :module $ {}
-    :loaders $ array
+    :loaders $ []
       {} (:test /\.cirru$) (:loader :react-hot!cirru-script) (:ignore /node_modules)
       {} (:test /\.md$) (:loader :raw-loader)
       {} (:test "/\.(png|jpg)$") (:loader :url-loader)
-      {} (:test /\.css$) $ :loader
-        ExtractTextPlugin.extract :style-loader :css!autoprefixer
+      {} (:test /\.css$) $ :loader :style!css!autoprefixer
 
   :plugins $ array
     new webpack.optimize.CommonsChunkPlugin :vendor :vendor.js

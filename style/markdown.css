@@ -5,3 +5,7 @@
   background: #F4F4F4;
   padding: 0.5em 1em;
 }
+
+.slide img {
+  max-width: 700px;
+}

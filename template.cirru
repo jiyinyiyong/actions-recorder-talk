@@ -12,12 +12,14 @@ var
     stir.doctype
     html null
       head null
-        title null :Workflow
-        meta $ object (:charset :utf-8)
-        link $ object (:rel :icon)
-          :href :images/sedum-icon.png
+        title null ":Unidirection Data Flow"
+        meta $ {} (:charset :utf-8)
+        cond (not data.dev)
+          link $ {} (:rel :icon)
+            :href :images/sedum-icon.png
+          , undefined
         link $ {} (:rel :stylesheet) (:href data.style)
-        script $ object (:src data.vendor) (:defer true)
-        script $ object (:src data.main) (:defer true)
+        script $ {} (:src data.vendor) (:defer true)
+        script $ {} (:src data.main) (:defer true)
       body null
         React.renderToString (Page)

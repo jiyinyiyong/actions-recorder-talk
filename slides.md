@@ -1,39 +1,42 @@
 
-### Sedum Slide
+### React 和 Flux
 
-So, this is a slide tool.
+[React Flux pros cons][flux]
 
-https://github.com/Memkits/sedum-slide
-
-----
-
-### Logo
-
-Here's a Logo
-
-![](./images/sedum-320x320.png)
+[flux]: https://www.quora.com/What-are-the-pros-and-cons-of-React-js-and-Flux-Are-they-the-future-of-front-end-development
 
 ----
 
-### This is a title
+### Redux
 
-Content is written in Markdown
+[Redux in Chinese][chinese]
+[simplest-redux-example][simplest]
 
-----
-
-### Divider here
-
-It'll be internally converted.
-
-Remarkable is the engine behind this project
+[chinese]: http://camsong.github.io/redux-in-chinese/
+[simplest]: https://github.com/jackielii/simplest-redux-example/
 
 ----
 
-### Code testing
+### Time traveling Debugger
 
-```coffee
-code = require './demo'
-print = (x) ->
-  console.log x
-print code
-```
+![](./illustrations/bret-time-travel.jpg)
+
+----
+
+### Immutable Data
+
+----
+
+### Single Store
+
+![](./illustrations/multiple-models.png)
+
+----
+
+### Unidirectional Data Flow
+
+[Unidirectional UI Architectures][unidirectional]
+
+[unidirectional]: http://staltz.com/unidirectional-user-interface-architectures.html
+
+----
