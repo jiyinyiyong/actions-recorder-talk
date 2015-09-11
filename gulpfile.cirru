@@ -23,6 +23,7 @@ gulp.task :rsync $ \ (cb)
     object
       :ssh true
       :src $ array :index.html :build :images :illustrations :slides.md
+        , :presentation.html :style :slides.pdf
       :recursive true
       :args $ array :--verbose
       :dest :tiye:~/repo/actions-recorder-talk/

@@ -1,32 +1,57 @@
 
+### 用 Redux 的理念改进前端的 Model
+
+关于 Redux
+
+* Time Travelling Debugger
+* 单向数据流
+* actions-recorder
+
+----
+
 ### Me
 
 [题叶][tiye],  @jiyinyiyong -- FP, GUI & Writing
-ChenYong@Teambition
 
-简聊前端, React 中文社区维护者
+* [@clojure-china](http://weibo.com/clojurechina)
+* [@DesignerNewsRSS](http://weibo.com/designernews)
+
+React 中文社区维护者
+
+ChenYong@Teambition 简聊前端
 
 [tiye]: http://tiye.me
 
-[@clojure-china](http://weibo.com/clojurechina)
-[@DesignerNewsRSS](http://weibo.com/designernews)
+![](./illustrations/teambition.jpg)
+
+----
+
+### 简聊
+
+<http://jianliao.com> 前端基于 React.js
+
+> 谈工作, 用简聊
+
+> 轻量、好用的团队沟通工具
+
+![](./illustrations/jianliao.png)
 
 ----
 
 ### CirruScript
 
-http://script.cirru.org/
+个人项目, 类似 CoffeeScript <http://script.cirru.org/>
 
-```coffee
-Cirru AST -> ES6 AST(Babel) -> ES5 AST -> JavaScript
-```
+    Cirru AST -> ES6 AST(Babel) -> ES5 AST -> JavaScript
 
-```coffee
-var greet $ \ (name)
-  console.log $ + ":Hi! " name
+一切皆是表达式! [Demo][demo]
 
-greet :Shanghai
-```
+[demo]:https://github.com/Cumulo/multi-user-markdown/blob/master/src/app/editor.cirru
+
+    var greet $ \ (name)
+      console.log $ + ":Hi! " name
+
+    greet :Shanghai
 
 ----
 
@@ -50,23 +75,23 @@ greet :Shanghai
 
 ----
 
-### 代码仓库
-
-核心 [redux](https://github.com/rackt/redux)
-绑定 [react-redux](https://github.com/rackt/react-redux)
-调试工具 [redux-devtools](https://github.com/gaearon/redux-devtools)
-
-[simplest-redux-example][simplest], 60sloc
-
-[simplest]: https://github.com/jackielii/simplest-redux-example/blob/master/index.js
-
-----
-
 ### Redux Demo
 
 [Todolist](https://github.com/matthew-sun/blog/issues/18)
 
 ![](./illustrations/redux-todo.gif)
+
+----
+
+### 代码仓库
+
+* 核心 [redux](https://github.com/rackt/redux)
+* 绑定 [react-redux](https://github.com/rackt/react-redux)
+* 调试工具 [redux-devtools](https://github.com/gaearon/redux-devtools)
+
+[simplest-redux-example][simplest], 60sloc
+
+[simplest]: https://github.com/jackielii/simplest-redux-example/blob/master/index.js
 
 ----
 
@@ -78,13 +103,11 @@ Designing on Principle, Bret Victor, 2012
 
 ----
 
-### Persistent Data
+### Multiple Store 的问题
 
-[Persistent Data Structure][vector]
+Backbone:
 
-[vector]: http://hypirion.com/musings/understanding-persistent-vector-pt-1
-
-![](./illustrations/vector-append.png)
+![](./illustrations/multiple-models.png)
 
 ----
 
@@ -93,14 +116,6 @@ Designing on Principle, Bret Victor, 2012
 [MVC pattern](http://amix.dk/blog/post/19615)
 
 ![](./illustrations/smalltalk-mvc.png)
-
-----
-
-### Single Store 的反面
-
-Backbone:
-
-![](./illustrations/multiple-models.png)
 
 ----
 
@@ -114,9 +129,27 @@ Backbone:
 
 ----
 
-### 优点在哪
+### 单向数据流
 
-Model, View, Actions
+不是修改数据, 而是生成新的数据
+
+![](./illustrations/helical.gif)
+
+----
+
+### 不可变数据(immutable)
+
+[Persistent Data Structure][vector]
+
+[vector]: http://hypirion.com/musings/understanding-persistent-vector-pt-1
+
+![](./illustrations/vector-append.png)
+
+----
+
+### 清晰明确的数据流
+
+Model, View, Actions 分层清晰, 前端走到这一步不容易
 
 ![](./illustrations/unidirectional-simple.png)
 
@@ -134,17 +167,15 @@ Model, View, Actions
 
 [actions-recorder](https://github.com/teambition/actions-recorder)
 
-```coffee
-core =
-  initial: schema.store # initial data of Store
-  records: []
-  pointer: 0
-  isTravelling: false
-  updater: (store actionType actionData) ->
-    switch actionType
-      when 'update' then update store actionData
-      else store
-```
+    core =
+      initial: schema.store # initial data of Store
+      records: []
+      pointer: 0
+      isTravelling: false
+      updater: (store actionType actionData) ->
+        switch actionType
+          when 'update' then update store actionData
+          else store
 
 ----
 
@@ -152,25 +183,21 @@ core =
 
 从 `initial` 和 `records` 推导出 `store`:
 
-```coffee
-getNewStore = ->
-  if core.isTravelling and core.pointer >= 0
-    next = core.pointer + 1
-    core.records.slice(0, next).reduce (acc, action) ->
-      core.updater acc, action.get(0), action.get(1)
-    , core.initial
-  else core.records.reduce (acc, action) ->
-    core.updater acc, action.get(0), action.get(1)
-  , core.initial
-```
+    getNewStore = ->
+      if core.isTravelling and core.pointer >= 0
+        next = core.pointer + 1
+        core.records.slice(0, next).reduce (acc, action) ->
+          core.updater acc, action.get(0), action.get(1)
+        , core.initial
+      else core.records.reduce (acc, action) ->
+        core.updater acc, action.get(0), action.get(1)
+      , core.initial
 
 ----
 
 ### 怎么得到 Store
 
-```coffee
-Store = Actions.reduce(Updater, InitialStore)
-```
+    Store = Actions.reduce(Updater, InitialStore)
 
 ![](./illustrations/store-reducer.png)
 
@@ -210,8 +237,8 @@ Action 的网络请求, 控制回滚
 
 ----
 
-### FAQ
+### 交流
 
-交流 http://react-china.org
+<http://nav.react-china.org>
 
 Thanks.
