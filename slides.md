@@ -22,8 +22,6 @@ ChenYong@Teambition 简聊前端
 
 [tiye]: http://tiye.me
 
-![](./illustrations/teambition.jpg)
-
 ----
 
 ### 简聊
@@ -95,7 +93,7 @@ ChenYong@Teambition 简聊前端
 
 ----
 
-### Time traveling Debugger
+### Time travelling Debugger
 
 Designing on Principle, Bret Victor, 2012
 
@@ -168,13 +166,13 @@ Model, View, Actions 分层清晰, 前端走到这一步不容易
 [actions-recorder](https://github.com/teambition/actions-recorder)
 
     core =
-      initial: schema.store # initial data of Store
-      records: []
-      pointer: 0
+      initial: schema.store # 初始数据
+      records: [] # Actions 的队列
+      pointer: 0 # 当前回溯位置
       isTravelling: false
-      updater: (store actionType actionData) ->
+      updater: (store, actionType, actionData) ->
         switch actionType
-          when 'update' then update store actionData
+          when 'update' then update(store, actionData)
           else store
 
 ----
@@ -214,13 +212,11 @@ Model 对应 Initial Store 和 Actions
 
 ### 想法
 
-* Debugger
+可以探索:
 
-保存所有 Actions 和 Store, 用于调试
-
-* Pending request
-
-Action 的网络请求, 控制回滚
+* 根据 Actions 和 Store, 查找 bug
+* 处理 Pending request 的网络请求, 控制回滚
+* 保存 Actions 用来重演和测试界面
 
 ----
 

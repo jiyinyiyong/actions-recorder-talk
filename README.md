@@ -1,36 +1,14 @@
 
-Sedum Slide
+关于 Actions Recorder(Like Redux) 的分享
 ----
 
-Demo http://repo.tiye.me/sedum-slide/
+Event http://www.hudongba.mobi/party/8puz
 
-A small slide tool to be less disturbing.
+HTML http://repo.tiye.me/actions-recorder-talk/
 
-### Logo
+Landslide http://repo.tiye.me/actions-recorder-talk/presentation.html
 
-![](./images/sedum-320x320.png)
-![](./images/sketch.png)
-
-Imspired by: https://dribbble.com/shots/1847084-Sedum-Repestre-Angelina?list=searches&offset=0
-
-![](./images/inspiration.png)
-
-### Usage
-
-* Development
-
-```text
-npm i
-gulp html
-webpack-dev-server --hot
-```
-
-* Production
-
-```text
-gulp buld
-gulp rsync
-```
+Actions Recorder https://github.com/teambition/actions-recorder
 
 ### License
 
